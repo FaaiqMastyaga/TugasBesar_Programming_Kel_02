@@ -26,8 +26,10 @@ int main(){
             command(perintah, cakru, enemy);
         }
         if(cakru->getHealth() > 0){
-            cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
+            cout << "\nKapal musuh telah dihancurkan, Kapten!";
             enemy_destroyed += 1;
+            cakru->health_recovery(enemy->getMaxHealth());
+            cakru->eval_health();
             delete(enemy);
         }
     }

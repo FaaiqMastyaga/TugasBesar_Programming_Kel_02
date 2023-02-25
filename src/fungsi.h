@@ -7,6 +7,7 @@ class Kapal{
     private:
         std::string type;
         double health;
+        double max_health;
         double damage;
         int max_range;
         int position[2] = {0,0};
@@ -18,6 +19,7 @@ class Kapal{
         // getter
         double getHealth();
         double getDamage();
+        double getMaxHealth();
         int getMaxRange();
         int* getPosition();
 
@@ -27,7 +29,9 @@ class Kapal{
         int check_position(int*, int*);
         void move(char, Kapal*&);
         double distance_to_target(Kapal*&);
-        void attack(Kapal*&);      
+        void attack(Kapal*&);
+        void health_recovery(double);
+        void eval_health();     
 };
 
 int random(int, int);
@@ -48,6 +52,8 @@ void show_info(Kapal*&, Kapal*&);
 
 void command(int, Kapal*, Kapal*);
 
-void delay();
+void delay(int);
 
 void loading();
+
+#endif

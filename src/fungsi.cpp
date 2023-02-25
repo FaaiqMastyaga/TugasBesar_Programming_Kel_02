@@ -42,6 +42,7 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
     this->max_range = inputMaxRange;
     this->position[0] = *(inputPosition);
     this->position[1] = *(inputPosition+1);
+    max_health = this->health;
 
     if(this->type == "enemy"){
         cout << "\nLapor, Kapten! Kapal musuh terdeteksi" << endl;
@@ -50,6 +51,10 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
 
 double Kapal::getHealth(){
     return this->health;
+}
+
+double Kapal::getMaxHealth(){
+    return this->max_health;
 }
 
 double Kapal::getDamage(){
@@ -159,6 +164,18 @@ void Kapal::attack(Kapal* &inputEnemy){
     }
 }
 
+void Kapal::health_recovery(double health_recovered){
+    health_recovered *= 0.1;
+    this->health  += health_recovered;
+    cout << " Kapal kita mengalami pemulihan health sebesar " << health_recovered << endl;
+}
+
+void Kapal::eval_health(){
+    if(this->health > this->max_health){
+        this->health = this->max_health;
+    }
+}
+
 int random(int min, int max){
     return (rand()%(max-min+1) + min);
 }
@@ -185,8 +202,11 @@ void direction(){
 }
 
 void show_health(Kapal* &cakru, Kapal* &enemy){
-    cout << "Health kapal kita: " << cakru->getHealth() << endl;
-    cout << "Health kapal musuh: " << enemy->getHealth() << endl;
+    cout << "Health kapal kita: " << cakru->getHealth();
+    if(cakru->getHealth() == cakru->getMaxHealth()){
+        cout << " [MAX]";
+    }
+    cout << "\nHealth kapal musuh: " << enemy->getHealth() << endl;
 }
 
 void show_position(Kapal* &cakru, Kapal* &enemy){
@@ -215,7 +235,9 @@ void command(int perintah, Kapal* cakru, Kapal* enemy){
         switch(perintah){
             case '1':
                 cakru->attack(enemy);
-                enemy->attack(cakru);
+                if(enemy->getHealth() > 0){
+                    enemy->attack(cakru);
+                }
                 break;
             case '2':
                 show_info(cakru, enemy);
