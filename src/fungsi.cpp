@@ -42,14 +42,14 @@ void Kapal::move(char arah){
 }
 
 double Kapal::distance_to_target(Kapal* &inputTarget){
-    return sqrt(pow((double)(Kapal::position[0] - inputTarget->position[0]), 2) + pow((double)(Kapal::position[1] - inputTarget->position[1]), 2)); 
+    return sqrt(pow((double)(this->position[0] - inputTarget->position[0]), 2) + pow((double)(this->position[1] - inputTarget->position[1]), 2)); 
 }
 
 void Kapal::attack(Kapal* &inputEnemy){
-    double distance = Kapal::distance_to_target(inputEnemy);
-        if(distance <= Kapal::max_range){
-            inputEnemy->health -= Kapal::damage;
-            cout << "\nDamage diberikan: " << Kapal::damage << endl;
+    double distance = this->distance_to_target(inputEnemy);
+        if(distance <= this->max_range){
+            inputEnemy->health -= this->damage;
+            cout << "\nDamage diberikan: " << this->damage << endl;
             cout << "Enemy health: " << inputEnemy->health << endl;
         }else{
             cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
@@ -57,7 +57,7 @@ void Kapal::attack(Kapal* &inputEnemy){
 }
 
 Kapal::~Kapal(){
-    if(Kapal::type == "cakru"){
+    if(this->type == "cakru"){
         cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
     }else{
         cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;

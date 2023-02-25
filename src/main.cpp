@@ -22,7 +22,7 @@ int main(){
         // Membuat objek enemy
         Kapal* enemy = new Kapal("enemy", random(MIN_HEALTH, MAX_HEALTH), random(MIN_DAMAGE, MAX_DAMAGE), random(MIN_RANGE, MAX_RANGE), coordinate);
 
-        while(enemy){
+        while(enemy->health > 0){
             show_info(cakru, enemy);
             command_info();
             cin >> perintah;
@@ -45,9 +45,11 @@ int main(){
                 cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
             }
         }
+        delete(enemy);
 
     cin.get();
     cout << endl;
     }
+    delete(cakru);
     return 0;
 }
