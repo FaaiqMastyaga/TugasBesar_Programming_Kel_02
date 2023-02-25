@@ -93,6 +93,11 @@ void direction(){
     cout << "(d) Kanan" << endl;
 }
 
+void show_health(Kapal* &cakru, Kapal* &enemy){
+    cout << "Health kapal kita: " << cakru->health << endl;
+    cout << "Health kapal musuh: " << enemy->health << endl;
+}
+
 void show_position(Kapal* &cakru, Kapal* &enemy){
     cout << "Posisi kapal kita: (" << cakru->position[0] << ", " << cakru->position[1] << ")" << endl;
     cout << "Posisi kapal musuh: (" << enemy->position[0] << ", " << enemy->position[1] << ")" << endl;
