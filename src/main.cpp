@@ -23,7 +23,6 @@ int main(){
             show_info(cakru, enemy);
             command_info();
             cin >> perintah;
-            system("cls");
             command(perintah, cakru, enemy);
         }
         if(cakru->health > 0){

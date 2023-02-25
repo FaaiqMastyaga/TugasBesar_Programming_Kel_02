@@ -19,7 +19,7 @@ void delay(int a){
     int add;
     int time;
 
-    time=a*100000000000;
+    time=a*1000000000;
 
     for(int i=0;i<time;i++){
         add*=i;
@@ -29,9 +29,10 @@ void delay(int a){
 }
 
 void loading(){
+    system("cls");
     cout<<endl;
-    cout<<"Harap tunggu Kapten, CAKRU akan kembali membawa laporan"<<endl;
-    delay(25);
+    cout<<"Harap tunggu Kapten, CAKRU akan kembali membawa laporan ";
+    delay(245);
     system("cls");
 }
 
@@ -44,7 +45,7 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
     this->position[1] = *(inputPosition+1);
 
     if(this->type == "enemy"){
-        cout << "\nInfo, Kapten! Kapal musuh terdeteksi" << endl;
+        cout << "\nLapor, Kapten! Kapal musuh terdeteksi" << endl;
     }
 }
 
@@ -99,6 +100,8 @@ void Kapal::move(char arah, Kapal* &inputEnemy){
         }
     }else{
         cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
+        system("pause");
+        system("cls");
     }
 }
 
@@ -111,7 +114,7 @@ void Kapal::attack(Kapal* &inputEnemy){
     if(this->type == "cakru"){
         if(distance <= this->max_range){
             inputEnemy->health -= this->damage;
-            cout << "\nInfo, Kapten! Kita telah menyerang kapal lawan" << endl;
+            cout << "\nLapor, Kapten! Kita telah menyerang kapal lawan" << endl;
             cout << "Damage diberikan: " << this->damage << endl;
             if(inputEnemy->health<0){
                 cout << "Enemy health: 0" << endl;
@@ -121,6 +124,9 @@ void Kapal::attack(Kapal* &inputEnemy){
         }else{
             cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
         }
+        cout << "Press any key to continue the report . . . ";
+        system("pause>0");
+        system("cls");
     }else{
         if(distance <= this->max_range){
             inputEnemy->health -= this->damage;
@@ -131,6 +137,9 @@ void Kapal::attack(Kapal* &inputEnemy){
             }else{
                 cout << "Health kapal kita: " << inputEnemy->health << endl;
             }
+            cout << "Press any key to continue the report . . . ";
+            system("pause>0");
+            system("cls");
         }
     }
 }
@@ -177,7 +186,7 @@ void show_shoot_range(Kapal* &cakru, Kapal* &enemy){
 }
 
 void show_info(Kapal* &cakru, Kapal* &enemy){
-    cout << "\nInfo, Kapten!" << endl;
+    cout << "\nLapor, Kapten!" << endl;
     show_health(cakru, enemy);
     show_position(cakru, enemy);
     show_shoot_range(cakru, enemy);
@@ -203,10 +212,15 @@ void command(int perintah, Kapal* cakru, Kapal* enemy){
                 break;
             case '3':
                 cout << "\nKapal kita berdiam di tempat sesuai arahan, Kapten." << endl;
+                cout << "Press any key to continue the report . . . ";
+                system("pause>0");
+                system("cls");
                 enemy->attack(cakru);
                 break;
         }
     }else{
         cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
+        system("pause");
+        system("cls");
     }
 }
