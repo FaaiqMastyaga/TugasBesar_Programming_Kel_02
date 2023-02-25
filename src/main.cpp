@@ -5,13 +5,11 @@ using namespace std;
 
 int main(){
     srand(time(NULL));
-    int *coordinate;
+    int coordinate[2] = {0,0};
     int enemy_destroyed = 0;
     int perintah;
     char arah;
 
-    // Prepare array dinamis untuk koordinat
-    coordinate = (int*)calloc(2, sizeof(int));
     // Membuat objek kapal cakru (player)
     Kapal* cakru = new Kapal("cakru", 200, 40, 5, coordinate);
 

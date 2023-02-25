@@ -21,7 +21,7 @@ class Kapal{
         int health;
         int damage;
         int max_range;
-        int *position = (int*)calloc(2, sizeof(int));
+        int position[2];
         
         Kapal(string inputType, int inputHealth, int inputDamage, int inputMaxRange, int *inputPosition){
             Kapal::type = inputType;
