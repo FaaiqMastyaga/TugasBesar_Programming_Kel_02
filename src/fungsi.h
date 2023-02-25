@@ -10,7 +10,10 @@ class Kapal{
         int position[2] = {0,0};
 
         Kapal(std::string, double, double, int, int*);
-        void move(char);
+        int check_position_to_map(int*);
+        int check_position_to_enemy(int*, int*);
+        int check_position(int*, int*);
+        void move(char, Kapal*&);
         double distance_to_target(Kapal*&);
         void attack(Kapal*&);
 };

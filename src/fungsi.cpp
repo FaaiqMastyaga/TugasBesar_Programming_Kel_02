@@ -28,20 +28,52 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
     }
 }
 
-void Kapal::move(char arah){
+int Kapal::check_position_to_map(int* cakruPosition){
+    int x = (cakruPosition[0] >= -MAP_SIZE) && (cakruPosition[0] <= MAP_SIZE);
+    int y = (cakruPosition[1] >= -MAP_SIZE) && (cakruPosition[1] <= MAP_SIZE);
+    return x && y;
+}
+
+int Kapal::check_position_to_enemy(int* cakruPosition, int* enemyPosition){
+    int x = (cakruPosition[0] == enemyPosition[0]);
+    int y = (cakruPosition[1] == enemyPosition[1]);
+    return !(x && y);
+}
+
+int Kapal::check_position(int* cakruPosition, int* enemyPosition){
+    return check_position_to_map(cakruPosition) && check_position_to_enemy(cakruPosition, enemyPosition);
+}
+
+void Kapal::move(char arah, Kapal* &inputEnemy){
     if((arah == 'w') || (arah == 's') || (arah == 'd') || (arah == 'a')){
         switch(arah){
             case 'w':
                 this->position[1] += 1;
+                if(!(this->check_position(this->position, inputEnemy->position))){
+                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    this->position[1] -= 1;
+                }
                 break;
             case 's':
                 this->position[1] -= 1;
+                if(!(this->check_position(this->position, inputEnemy->position))){
+                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    this->position[1] += 1;
+                }
                 break;
             case 'd':
                 this->position[0] += 1;
+                if(!(this->check_position(this->position, inputEnemy->position))){
+                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    this->position[0] -= 1;
+                }
                 break;
             case 'a':
                 this->position[0] -= 1;
+                if(!(this->check_position(this->position, inputEnemy->position))){
+                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    this->position[0] += 1;
+                }
                 break;
         }
     }else{
@@ -135,7 +167,7 @@ void command(int perintah, Kapal* cakru, Kapal* enemy){
                 direction();
                 cout << "Ke mana kita akan bergerak, Kapten? : ";
                 cin >> arah;
-                cakru->move(arah);
+                cakru->move(arah, enemy);
                 enemy->attack(cakru);
                 break;
             case '3':
