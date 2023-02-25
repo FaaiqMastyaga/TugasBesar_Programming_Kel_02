@@ -12,20 +12,20 @@ int main(){
 
     Kapal* cakru = new Kapal("cakru", 200, 40, 5, coordinate);
 
-    while(cakru->health > 0){
+    while(cakru->getHealth() > 0){
         do{
             set_coordinate(coordinate);
-        }while((cakru->position[0] == coordinate[0]) && (cakru->position[1] == coordinate[1]));
+        }while((coordinate[0] == cakru->getPosition()[0]) && (coordinate[1] == cakru->getPosition()[1]));
         
         Kapal* enemy = new Kapal("enemy", random(MIN_HEALTH, MAX_HEALTH), random(MIN_DAMAGE, MAX_DAMAGE), random(MIN_RANGE, MAX_RANGE), coordinate);
 
-        while(enemy->health > 0 && cakru->health > 0){
+        while(enemy->getHealth() > 0 && cakru->getHealth() > 0){
             show_info(cakru, enemy);
             command_info();
             cin >> perintah;
             command(perintah, cakru, enemy);
         }
-        if(cakru->health > 0){
+        if(cakru->getHealth() > 0){
             cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
             enemy_destroyed += 1;
             delete(enemy);

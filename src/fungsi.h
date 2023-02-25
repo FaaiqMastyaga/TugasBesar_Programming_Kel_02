@@ -1,21 +1,33 @@
-#include <iostream>
+#ifndef __KAPAL
+#define __KAPAL
+
 #include <string>
 
 class Kapal{
-    public:
+    private:
         std::string type;
         double health;
         double damage;
         int max_range;
         int position[2] = {0,0};
 
+    public:
+        // constructor
         Kapal(std::string, double, double, int, int*);
+
+        // getter
+        double getHealth();
+        double getDamage();
+        int getMaxRange();
+        int* getPosition();
+
+        // method
         int check_position_to_map(int*);
         int check_position_to_enemy(int*, int*);
         int check_position(int*, int*);
         void move(char, Kapal*&);
         double distance_to_target(Kapal*&);
-        void attack(Kapal*&);
+        void attack(Kapal*&);      
 };
 
 int random(int, int);
