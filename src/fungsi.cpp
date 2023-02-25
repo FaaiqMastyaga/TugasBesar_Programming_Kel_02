@@ -5,7 +5,7 @@
 #include <math.h>
 #include "fungsi.h"
 
-#define MAP_SIZE 10
+#define MAP_SIZE 5
 #define MIN_HEALTH 100 // minimum health kapal musuh
 #define MAX_HEALTH 150 // maksimum health kapal musuh
 #define MIN_DAMAGE 10 // minimum damage kapal musuh
@@ -99,9 +99,14 @@ void show_position(Kapal* &cakru, Kapal* &enemy){
     cout << "Jarak terhadap musuh: " << cakru->distance_to_target(enemy) << endl;
 }
 
-void show_info(Kapal* &cakru, Kapal* &enemy){
-    cout << "\nInfo, Kapten!" << endl;
-    show_position(cakru, enemy);
+void show_shoot_range(Kapal* &cakru, Kapal* &enemy){
     cout << "Range tembak kapal kita: " << cakru->max_range << endl;
     cout << "Range tembak kapal musuh: " << enemy->max_range << endl;
+}
+
+void show_info(Kapal* &cakru, Kapal* &enemy){
+    cout << "\nInfo, Kapten!" << endl;
+    show_health(cakru, enemy);
+    show_position(cakru, enemy);
+    show_shoot_range(cakru, enemy);
 }

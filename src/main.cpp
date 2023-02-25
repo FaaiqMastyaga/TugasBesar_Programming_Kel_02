@@ -33,6 +33,7 @@ int main(){
                     cakru->attack(enemy);
                     break;
                 case 2:
+                    show_info(cakru, enemy);
                     direction();
                     cout << "Ke mana kita akan bergerak, Kapten? : ";
                     cin >> arah;
