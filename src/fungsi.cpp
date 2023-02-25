@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
-#include <time.h>
 #include <math.h>
 #include "fungsi.h"
 
@@ -26,6 +25,22 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
     if(this->type == "enemy"){
         cout << "\nInfo, Kapten! Kapal musuh terdeteksi" << endl;
     }
+}
+
+double Kapal::getHealth(){
+    return this->health;
+}
+
+double Kapal::getDamage(){
+    return this->damage;
+}
+
+int Kapal::getMaxRange(){
+    return this->max_range;
+}
+
+int* Kapal::getPosition(){
+    return this->position;
 }
 
 int Kapal::check_position_to_map(int* cakruPosition){
@@ -117,10 +132,10 @@ void set_coordinate(int* coordinate){
 
 void command_info(){
     cout << "\nKami siap menerima perintah, Kapten" << endl;
-        cout << "(1) Menembak" << endl; 
-        cout << "(2) Bergerak" << endl; 
-        cout << "(3) Diam di tempat" << endl;
-        cout << "Perintah Anda, Kapten : ";
+    cout << "(1) Menembak" << endl; 
+    cout << "(2) Bergerak" << endl; 
+    cout << "(3) Diam di tempat" << endl;
+    cout << "Perintah Anda, Kapten : ";
 }
 
 void direction(){
@@ -132,19 +147,19 @@ void direction(){
 }
 
 void show_health(Kapal* &cakru, Kapal* &enemy){
-    cout << "Health kapal kita: " << cakru->health << endl;
-    cout << "Health kapal musuh: " << enemy->health << endl;
+    cout << "Health kapal kita: " << cakru->getHealth() << endl;
+    cout << "Health kapal musuh: " << enemy->getHealth() << endl;
 }
 
 void show_position(Kapal* &cakru, Kapal* &enemy){
-    cout << "Posisi kapal kita: (" << cakru->position[0] << ", " << cakru->position[1] << ")" << endl;
-    cout << "Posisi kapal musuh: (" << enemy->position[0] << ", " << enemy->position[1] << ")" << endl;
+    cout << "Posisi kapal kita: (" << cakru->getPosition()[0] << ", " << cakru->getPosition()[1] << ")" << endl;
+    cout << "Posisi kapal musuh: (" << enemy->getPosition()[0] << ", " << enemy->getPosition()[1] << ")" << endl;
     cout << "Jarak terhadap musuh: " << cakru->distance_to_target(enemy) << endl;
 }
 
 void show_shoot_range(Kapal* &cakru, Kapal* &enemy){
-    cout << "Range tembak kapal kita: " << cakru->max_range << endl;
-    cout << "Range tembak kapal musuh: " << enemy->max_range << endl;
+    cout << "Range tembak kapal kita: " << cakru->getMaxRange() << endl;
+    cout << "Range tembak kapal musuh: " << enemy->getMaxRange() << endl;
 }
 
 void show_info(Kapal* &cakru, Kapal* &enemy){
