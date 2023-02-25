@@ -35,3 +35,7 @@ void show_shoot_range(Kapal*&, Kapal*&);
 void show_info(Kapal*&, Kapal*&);
 
 void command(int, Kapal*, Kapal*);
+
+void delay();
+
+void loading();

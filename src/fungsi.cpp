@@ -15,6 +15,26 @@
 
 using namespace std;
 
+void delay(int a){
+    int add;
+    int time;
+
+    time=a*100000000000;
+
+    for(int i=0;i<time;i++){
+        add*=i;
+        add++;
+        add++;
+    }
+}
+
+void loading(){
+    cout<<endl;
+    cout<<"Harap tunggu Kapten, CAKRU akan kembali membawa laporan"<<endl;
+    delay(25);
+    system("cls");
+}
+
 Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int inputMaxRange, int* inputPosition){
     this->type = inputType;
     this->health = inputHealth;
@@ -46,6 +66,7 @@ int Kapal::check_position(int* cakruPosition, int* enemyPosition){
 
 void Kapal::move(char arah, Kapal* &inputEnemy){
     if((arah == 'w') || (arah == 's') || (arah == 'd') || (arah == 'a')){
+        loading();
         switch(arah){
             case 'w':
                 this->position[1] += 1;
@@ -154,9 +175,11 @@ void show_info(Kapal* &cakru, Kapal* &enemy){
     show_shoot_range(cakru, enemy);
 }
 
+
 void command(int perintah, Kapal* cakru, Kapal* enemy){
     char arah;
     if((perintah == '1') || (perintah == '2') || (perintah == '3')){
+        loading();
         switch(perintah){
             case '1':
                 cakru->attack(enemy);
