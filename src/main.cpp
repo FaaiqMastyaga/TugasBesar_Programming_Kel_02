@@ -7,49 +7,31 @@ int main(){
     srand(time(NULL));
     int coordinate[2] = {0,0};
     int enemy_destroyed = 0;
-    int perintah;
-    char arah;
+    char perintah;
 
-    // Membuat objek kapal cakru (player)
     Kapal* cakru = new Kapal("cakru", 200, 40, 5, coordinate);
 
-    while(cakru->health >= 0){
+    while(cakru->health > 0){
         do{
-            coordinate[0] = random(-MAP_SIZE, MAP_SIZE);
-            coordinate[1] = random(-MAP_SIZE, MAP_SIZE);
+            set_coordinate(coordinate);
         }while((cakru->position[0] == coordinate[0]) && (cakru->position[1] == coordinate[1]));
         
-        // Membuat objek enemy
         Kapal* enemy = new Kapal("enemy", random(MIN_HEALTH, MAX_HEALTH), random(MIN_DAMAGE, MAX_DAMAGE), random(MIN_RANGE, MAX_RANGE), coordinate);
 
-        while(enemy->health > 0){
+        while(enemy->health > 0 && cakru->health > 0){
             show_info(cakru, enemy);
             command_info();
             cin >> perintah;
-            switch(perintah){
-                case 1:
-                    cakru->attack(enemy);
-                    break;
-                case 2:
-                    show_info(cakru, enemy);
-                    direction();
-                    cout << "Ke mana kita akan bergerak, Kapten? : ";
-                    cin >> arah;
-                    cakru->move(arah);
-                    break;
-                case 3:
-                    cout << "\nKapal kita berdiam di tempat sesuai arahan, Kapten." << endl;
-                    break;
-            }
-            if((perintah < 1) || (perintah > 3)){
-                cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
-            }
+            command(perintah, cakru, enemy);
         }
-        delete(enemy);
-
-    cin.get();
-    cout << endl;
+        if(cakru->health > 0){
+            cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
+            enemy_destroyed += 1;
+            delete(enemy);
+        }
     }
+    cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
+    cout << "Kapal musuh yang berhasil dihancurkan: " << enemy_destroyed << endl;
     delete(cakru);
     return 0;
 }

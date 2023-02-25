@@ -9,15 +9,26 @@ class Kapal{
         int max_range;
         int position[2] = {0,0};
 
-        Kapal(std::string inputType, double inputHealth, double inputDamage, int inputMaxRange, int* inputPosition);
-        void move(char arah);
-        double distance_to_target(Kapal* &inputTarget);
-        void attack(Kapal* &inputEnemy);
-        ~Kapal();
+        Kapal(std::string, double, double, int, int*);
+        void move(char);
+        double distance_to_target(Kapal*&);
+        void attack(Kapal*&);
 };
 
-int random(int min, int max);
+int random(int, int);
+
+void set_coordinate(int*);
 
 void command_info();
 
 void direction();
+
+void show_health(Kapal*&, Kapal*&);
+
+void show_position(Kapal*&, Kapal*&);
+
+void show_shoot_range(Kapal*&, Kapal*&);
+
+void show_info(Kapal*&, Kapal*&);
+
+void command(int, Kapal*, Kapal*);

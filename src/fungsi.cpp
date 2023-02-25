@@ -22,22 +22,30 @@ Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int input
     this->max_range = inputMaxRange;
     this->position[0] = *(inputPosition);
     this->position[1] = *(inputPosition+1);
+
+    if(this->type == "enemy"){
+        cout << "\nInfo, Kapten! Kapal musuh terdeteksi" << endl;
+    }
 }
 
 void Kapal::move(char arah){
-    switch(arah){
-        case 'w':
-            this->position[1] += 1;
-            break;
-        case 's':
-            this->position[1] -= 1;
-            break;
-        case 'd':
-            this->position[0] += 1;
-            break;
-        case 'a':
-            this->position[0] -= 1;
-            break;
+    if((arah == 'w') || (arah == 's') || (arah == 'd') || (arah == 'a')){
+        switch(arah){
+            case 'w':
+                this->position[1] += 1;
+                break;
+            case 's':
+                this->position[1] -= 1;
+                break;
+            case 'd':
+                this->position[0] += 1;
+                break;
+            case 'a':
+                this->position[0] -= 1;
+                break;
+        }
+    }else{
+        cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
     }
 }
 
@@ -47,26 +55,33 @@ double Kapal::distance_to_target(Kapal* &inputTarget){
 
 void Kapal::attack(Kapal* &inputEnemy){
     double distance = this->distance_to_target(inputEnemy);
+    if(this->type == "cakru"){
         if(distance <= this->max_range){
             inputEnemy->health -= this->damage;
-            cout << "\nDamage diberikan: " << this->damage << endl;
+            cout << "\nInfo, Kapten! Kita telah menyerang kapal lawan" << endl;
+            cout << "Damage diberikan: " << this->damage << endl;
             cout << "Enemy health: " << inputEnemy->health << endl;
         }else{
             cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
         }
-}
-
-Kapal::~Kapal(){
-    if(this->type == "cakru"){
-        cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
     }else{
-        cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
+        if(distance <= this->max_range){
+            inputEnemy->health -= this->damage;
+            cout << "\nGawat, Kapten! Kapal kita telah diserang" << endl;
+            cout << "Damage diterima: " << this->damage << endl;
+            cout << "Health kapal kita: " << inputEnemy->health << endl;
+        }
     }
 }
 
 int random(int min, int max){
     return (rand()%(max-min+1) + min);
 }
+
+void set_coordinate(int* coordinate){
+    coordinate[0] = random(-MAP_SIZE, MAP_SIZE);
+    coordinate[1] = random(-MAP_SIZE, MAP_SIZE);
+};
 
 void command_info(){
     cout << "\nKami siap menerima perintah, Kapten" << endl;
@@ -105,4 +120,30 @@ void show_info(Kapal* &cakru, Kapal* &enemy){
     show_health(cakru, enemy);
     show_position(cakru, enemy);
     show_shoot_range(cakru, enemy);
+}
+
+void command(int perintah, Kapal* cakru, Kapal* enemy){
+    char arah;
+    if((perintah == '1') || (perintah == '2') || (perintah == '3')){
+        switch(perintah){
+            case '1':
+                cakru->attack(enemy);
+                enemy->attack(cakru);
+                break;
+            case '2':
+                show_info(cakru, enemy);
+                direction();
+                cout << "Ke mana kita akan bergerak, Kapten? : ";
+                cin >> arah;
+                cakru->move(arah);
+                enemy->attack(cakru);
+                break;
+            case '3':
+                cout << "\nKapal kita berdiam di tempat sesuai arahan, Kapten." << endl;
+                enemy->attack(cakru);
+                break;
+        }
+    }else{
+        cout << "\nKami tidak mengerti maksud Anda, Kapten" << endl;
+    }
 }
