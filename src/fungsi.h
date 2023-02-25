@@ -48,4 +48,6 @@ void show_info(Kapal*&, Kapal*&);
 
 void command(int, Kapal*, Kapal*);
 
-#endif
+void delay();
+
+void loading();

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "fungsi.cpp"
+#include <bits/stdc++.h>
 
 using namespace std;
 
