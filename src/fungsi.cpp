@@ -113,7 +113,11 @@ void Kapal::attack(Kapal* &inputEnemy){
             inputEnemy->health -= this->damage;
             cout << "\nInfo, Kapten! Kita telah menyerang kapal lawan" << endl;
             cout << "Damage diberikan: " << this->damage << endl;
-            cout << "Enemy health: " << inputEnemy->health << endl;
+            if(inputEnemy->health<0){
+                cout << "Enemy health: 0" << endl;
+            }else{
+                cout << "Enemy health: " << inputEnemy->health << endl;
+            }
         }else{
             cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
         }
@@ -122,7 +126,11 @@ void Kapal::attack(Kapal* &inputEnemy){
             inputEnemy->health -= this->damage;
             cout << "\nGawat, Kapten! Kapal kita telah diserang" << endl;
             cout << "Damage diterima: " << this->damage << endl;
-            cout << "Health kapal kita: " << inputEnemy->health << endl;
+            if(inputEnemy->health<0){
+                cout << "Health kapal kita: 0" << endl;
+            }else{
+                cout << "Health kapal kita: " << inputEnemy->health << endl;
+            }
         }
     }
 }
