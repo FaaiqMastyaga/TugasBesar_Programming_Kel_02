@@ -89,8 +89,8 @@ void direction(){
     cout << "\nKapal kita dapat bergerak dalam arah berikut, Kapten" << endl;
     cout << "(w) Maju" << endl;
     cout << "(s) Mundur" << endl;
-    cout << "(a) Kanan" << endl;
-    cout << "(d) Kiri" << endl;
+    cout << "(a) Kiri" << endl;
+    cout << "(d) Kanan" << endl;
 }
 
 void show_position(Kapal* &cakru, Kapal* &enemy){
