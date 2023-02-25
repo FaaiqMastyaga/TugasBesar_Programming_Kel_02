@@ -15,63 +15,54 @@
 
 using namespace std;
 
-class Kapal{
-    public:
-        string type;
-        int health;
-        int damage;
-        int max_range;
-        int position[2];
-        
-        Kapal(string inputType, int inputHealth, int inputDamage, int inputMaxRange, int *inputPosition){
-            Kapal::type = inputType;
-            Kapal::health = inputHealth;
-            Kapal::damage = inputDamage;
-            Kapal::max_range = inputMaxRange;
-            Kapal::position[0] = *(inputPosition);
-            Kapal::position[1] = *(inputPosition+1);
-        }
+Kapal::Kapal(string inputType, double inputHealth, double inputDamage, int inputMaxRange, int* inputPosition){
+    this->type = inputType;
+    this->health = inputHealth;
+    this->damage = inputDamage;
+    this->max_range = inputMaxRange;
+    this->position[0] = *(inputPosition);
+    this->position[1] = *(inputPosition+1);
+}
 
-        void move(char arah){
-            switch(arah){
-                case 'w':
-                    Kapal::position[1] += 1;
-                    break;
-                case 's':
-                    Kapal::position[1] -= 1;
-                    break;
-                case 'd':
-                    Kapal::position[0] += 1;
-                    break;
-                case 'a':
-                    Kapal::position[0] -= 1;
-                    break;
-            }
-        }
+void Kapal::move(char arah){
+    switch(arah){
+        case 'w':
+            this->position[1] += 1;
+            break;
+        case 's':
+            this->position[1] -= 1;
+            break;
+        case 'd':
+            this->position[0] += 1;
+            break;
+        case 'a':
+            this->position[0] -= 1;
+            break;
+    }
+}
 
-        double distance_to_target(Kapal* &inputTarget){
-            return sqrt(pow((double)(Kapal::position[0] - inputTarget->position[0]), 2) + pow((double)(Kapal::position[1] - inputTarget->position[1]), 2));
-        }
+double Kapal::distance_to_target(Kapal* &inputTarget){
+    return sqrt(pow((double)(Kapal::position[0] - inputTarget->position[0]), 2) + pow((double)(Kapal::position[1] - inputTarget->position[1]), 2)); 
+}
 
-        void attack(Kapal* &inputEnemy){
-            double distance = Kapal::distance_to_target(inputEnemy);
-            if(distance <= Kapal::max_range){
-                inputEnemy->health -= Kapal::damage;
-                cout << "\nDamage diberikan: " << Kapal::damage << endl;
-                cout << "Enemy health: " << inputEnemy->health << endl;
-            }else{
-                cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
-            }
+void Kapal::attack(Kapal* &inputEnemy){
+    double distance = Kapal::distance_to_target(inputEnemy);
+        if(distance <= Kapal::max_range){
+            inputEnemy->health -= Kapal::damage;
+            cout << "\nDamage diberikan: " << Kapal::damage << endl;
+            cout << "Enemy health: " << inputEnemy->health << endl;
+        }else{
+            cout << "\nMaaf, Kapten. Target berada di luar jangkauan" << endl;
         }
+}
 
-        ~Kapal(){
-            if(Kapal::type == "cakru"){
-                cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
-            }else{
-                cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
-            }
-        }
-};
+Kapal::~Kapal(){
+    if(Kapal::type == "cakru"){
+        cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
+    }else{
+        cout << "\nKapal musuh telah dihancurkan, Kapten!" << endl;
+    }
+}
 
 int random(int min, int max){
     return (rand()%(max-min+1) + min);
