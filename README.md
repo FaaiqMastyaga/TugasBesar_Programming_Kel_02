@@ -21,4 +21,4 @@ link GitHub: https://github.com/FaaiqMastyaga/TugasBesar_Programming_Kel_02
 Kelompok 2
 - 16722329 - Faaiq Mastyaga - Membuat atribut serta fitur basic dan tambahan pada kapal
 - 18221158 - Angela Geraldine H. P. - Membuat dan mengisi file dokumentasi, melakukan test jalannya program
-- nim - nama - peran
+- 19622268 - Muhammad Fatihul Irhab - Membuat fungsi untuk tampilan, memperbaiki tampilan, dan membantu dokumentasi
