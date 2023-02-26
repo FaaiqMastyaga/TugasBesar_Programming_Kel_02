@@ -92,28 +92,44 @@ void Kapal::move(char arah, Kapal* &inputEnemy){
             case 'w':
                 this->position[1] += 1;
                 if(!(this->check_position(this->position, inputEnemy->position))){
-                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    if(!(this->check_position_to_enemy(this->position, inputEnemy->position))){
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal akan menabrak" << endl;
+                    }else{
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal melebihi map" << endl;
+                    }
                     this->position[1] -= 1;
                 }
                 break;
             case 's':
                 this->position[1] -= 1;
                 if(!(this->check_position(this->position, inputEnemy->position))){
-                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    if(!(this->check_position_to_enemy(this->position, inputEnemy->position))){
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal akan menabrak" << endl;
+                    }else{
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal melebihi map" << endl;
+                    }
                     this->position[1] += 1;
                 }
                 break;
             case 'd':
                 this->position[0] += 1;
                 if(!(this->check_position(this->position, inputEnemy->position))){
-                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    if(!(this->check_position_to_enemy(this->position, inputEnemy->position))){
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal akan menabrak" << endl;
+                    }else{
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal melebihi map" << endl;
+                    }
                     this->position[0] -= 1;
                 }
                 break;
             case 'a':
                 this->position[0] -= 1;
                 if(!(this->check_position(this->position, inputEnemy->position))){
-                    cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut" << endl;
+                    if(!(this->check_position_to_enemy(this->position, inputEnemy->position))){
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal akan menabrak" << endl;
+                    }else{
+                        cout << "\nMaaf, Kapten. Kapal kita tidak bisa bergerak ke arah tersebut, karena kapal melebihi map" << endl;
+                    }
                     this->position[0] += 1;
                 }
                 break;
