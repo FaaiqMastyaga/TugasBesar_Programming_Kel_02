@@ -166,8 +166,15 @@ void Kapal::attack(Kapal* &inputEnemy){
 
 void Kapal::health_recovery(double health_recovered){
     health_recovered *= 0.1;
-    this->health  += health_recovered;
-    cout << " Kapal kita mengalami pemulihan health sebesar " << health_recovered << endl;
+    if(this->health==200){
+        cout<<" Kapal kita tidak mengalami keruskan "<<endl;
+    }else if ((this->health + health_recovered)>200){
+        cout << " Kapal kita mengalami pemulihan health sebesar " << (200 - this->health) << endl;
+        this->health  += health_recovered;
+    }else{
+        this->health  += health_recovered;
+        cout << " Kapal kita mengalami pemulihan health sebesar " << health_recovered << endl;
+    }
 }
 
 void Kapal::eval_health(){

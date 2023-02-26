@@ -31,6 +31,9 @@ int main(){
             cakru->health_recovery(enemy->getMaxHealth());
             cakru->eval_health();
             delete(enemy);
+            cout << "Press any key to continue the report . . . ";
+            system("pause>0");
+            system("cls");
         }
     }
     cout << "\nKita telah kalah, Kapten. Kapal kita telah dihancurkan" << endl;
